@@ -14,12 +14,12 @@ import net.kronos.rkon.core.ex.MalformedPacketException;
 
 public class RconPacket {
 	
-	public static final int SERVERDATA_EXECCOMMAND = 2;
-	public static final int SERVERDATA_AUTH = 3;
+	public static final int SERVER_DATA_EXECUTE_COMMAND = 2;
+	public static final int SERVER_DATA_AUTH = 3;
 	
-	private int requestId;
-	private int type;
-	private byte[] payload;
+	private final int requestId;
+	private final int type;
+	private final byte[] payload;
 	
 	private RconPacket(int requestId, int type, byte[] payload) {
 		this.requestId = requestId;

@@ -3,6 +3,7 @@ package net.kronos.rkon.core;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import net.kronos.rkon.core.ex.AuthenticationException;
@@ -29,7 +30,7 @@ public class Rcon {
 	 */
 	public Rcon(String host, int port, byte[] password) throws IOException, AuthenticationException {
 		// Default charset is utf8
-		this.charset = Charset.forName("UTF-8");
+		this.charset = StandardCharsets.UTF_8;
 		
 		// Connect to host
 		this.connect(host, port, password);
@@ -64,7 +65,7 @@ public class Rcon {
 		}
 		
 		// Send the auth packet
-		RconPacket res = this.send(RconPacket.SERVERDATA_AUTH, password);
+		RconPacket res = this.send(RconPacket.SERVER_DATA_AUTH, password);
 		
 		// Auth failed
 		if(res.getRequestId() == -1) {
@@ -96,7 +97,7 @@ public class Rcon {
 			throw new IllegalArgumentException("Payload can't be null or empty");
 		}
 		
-		RconPacket response = this.send(RconPacket.SERVERDATA_EXECCOMMAND, payload.getBytes());
+		RconPacket response = this.send(RconPacket.SERVER_DATA_EXECUTE_COMMAND, payload.getBytes());
 		
 		return new String(response.getPayload(), this.getCharset());
 	}
