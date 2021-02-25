@@ -1,5 +1,7 @@
-# rkon-core
+# RconCore
 This is a library for the [Source RCON Protocol](https://developer.valvesoftware.com/wiki/Source_RCON_Protocol), it is intended for raw use; there are no presets or built-in commands.
+
+Forked from [Kronos666/rkon-core](https://github.com/Kronos666/rkon-core)
 
 ## Usage
 ```java
@@ -15,4 +17,19 @@ System.out.println(result);
 When connecting to the rcon server, an `AuthenticationException` will be thrown if the password is incorrect.
 
 ## Download
-The latest packed .jar, ready to use as a library, is available [here](https://github.com/Pequla/RconCore/releases/latest).
+If you want to download a packed `.jar`, its available [here](https://github.com/Pequla/RconCore/releases/latest).
+
+### Maven 
+[![](https://jitpack.io/v/Pequla/RconCore.svg)](https://jitpack.io/#Pequla/RconCore)
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.Pequla</groupId>
+    <artifactId>RconCore</artifactId>
+    <version>1.2</version>
+</dependency>
+```
