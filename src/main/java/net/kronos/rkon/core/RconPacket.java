@@ -40,9 +40,9 @@ public class RconPacket {
 	}
 	
 	/**
-	 * Send a Rcon packet and fetch the response
+	 * Send a RconClient packet and fetch the response
 	 * 
-	 * @param rcon Rcon instance
+	 * @param rcon RconClient instance
 	 * @param type The packet type
 	 * @param payload The payload (password, command, etc.)
 	 * @return A RconPacket object containing the response
@@ -50,7 +50,7 @@ public class RconPacket {
 	 * @throws IOException
 	 * @throws MalformedPacketException 
 	 */
-	protected static RconPacket send(Rcon rcon, int type, byte[] payload) throws IOException {
+	protected static RconPacket send(RconClient rcon, int type, byte[] payload) throws IOException {
 		try {
 			RconPacket.write(rcon.getSocket().getOutputStream(), rcon.getRequestId(), type, payload);
 		}
@@ -75,7 +75,7 @@ public class RconPacket {
 	 * 
 	 * @throws IOException
 	 */
-	private static void write(OutputStream out, int requestId, int type, byte[] payload) throws IOException {
+	public static void write(OutputStream out, int requestId, int type, byte[] payload) throws IOException {
 		int bodyLength = RconPacket.getBodyLength(payload.length);
 		int packetLength = RconPacket.getPacketLength(bodyLength);
 		

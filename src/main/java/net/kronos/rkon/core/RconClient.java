@@ -3,51 +3,45 @@ package net.kronos.rkon.core;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import net.kronos.rkon.core.ex.AuthenticationException;
 
-public class Rcon {
+public class RconClient {
 	
 	private final Object sync = new Object();
 	private final Random rand = new Random();
 	
 	private int requestId;
 	private Socket socket;
-	
-	private Charset charset;
 
 	/**
-	 * Create, connect and authenticate a new Rcon object
+	 * Create, connect and authenticate a new RconClient object
 	 * 
-	 * @param host Rcon server address
-	 * @param port Rcon server port
-	 * @param password Rcon server password
+	 * @param host RconClient server address
+	 * @param port RconClient server port
+	 * @param password RconClient server password
 	 * 
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public Rcon(String host, int port, byte[] password) throws IOException, AuthenticationException {
+	public RconClient(String host, int port, byte[] password) throws IOException, AuthenticationException {
 		this(host, port, password, 0);
 	}
 
 	/**
-	 * Create, connect and authenticate a new Rcon object
+	 * Create, connect and authenticate a new RconClient object
 	 *
-	 * @param host Rcon server address
-	 * @param port Rcon server port
-	 * @param password Rcon server password
-	 * @param timeout Rcon socket connection timeout
+	 * @param host RconClient server address
+	 * @param port RconClient server port
+	 * @param password RconClient server password
+	 * @param timeout RconClient socket connection timeout
 	 *
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public Rcon(String host, int port, byte[] password, int timeout) throws IOException, AuthenticationException {
-		// Default charset is utf8
-		this.charset = StandardCharsets.UTF_8;
-
+	public RconClient(String host, int port, byte[] password, int timeout) throws IOException, AuthenticationException {
 		// Connect to host
 		this.connect(host, port, password, timeout);
 	}
@@ -55,9 +49,9 @@ public class Rcon {
 	/**
 	 * Connect to a rcon server
 	 *
-	 * @param host Rcon server address
-	 * @param port Rcon server port
-	 * @param password Rcon server password
+	 * @param host RconClient server address
+	 * @param port RconClient server port
+	 * @param password RconClient server password
 	 *
 	 * @throws IOException
 	 * @throws AuthenticationException
@@ -69,10 +63,10 @@ public class Rcon {
 	/**
 	 * Connect to a rcon server
 	 * 
-	 * @param host Rcon server address
-	 * @param port Rcon server port
-	 * @param password Rcon server password
-	 * @param timeout Rcon socket connection timeout
+	 * @param host RconClient server address
+	 * @param port RconClient server port
+	 * @param password RconClient server password
+	 * @param timeout RconClient socket connection timeout
 	 *
 	 * @throws IOException
 	 * @throws AuthenticationException
@@ -131,7 +125,7 @@ public class Rcon {
 		
 		RconPacket response = this.send(RconPacket.SERVER_DATA_EXECUTE_COMMAND, payload.getBytes());
 		
-		return new String(response.getPayload(), this.getCharset());
+		return new String(response.getPayload(), StandardCharsets.UTF_8);
 	}
 	
 	private RconPacket send(int type, byte[] payload) throws IOException {
@@ -146,14 +140,6 @@ public class Rcon {
 	
 	public Socket getSocket() {
 		return socket;
-	}
-	
-	public Charset getCharset() {
-		return charset;
-	}
-	
-	public void setCharset(Charset charset) {
-		this.charset = charset;
 	}
 
 }
