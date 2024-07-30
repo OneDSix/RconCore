@@ -12,6 +12,7 @@ import java.nio.ByteOrder;
 
 import net.kronos.rkon.core.ex.MalformedPacketException;
 
+/** An internal data type for handling RCON packets. Not a public API, but can be freely accessed and is documented as one. */
 public class RconPacket {
 	
 	public static final int SERVER_DATA_EXECUTE_COMMAND = 2;

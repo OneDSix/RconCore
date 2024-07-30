@@ -8,6 +8,10 @@ import java.util.Random;
 
 import net.kronos.rkon.core.ex.AuthenticationException;
 
+/** An RCON Protocol compatible client.
+ * @see RconClient#RconClient(String, int, byte[], int)
+ * @see RconClient#RconClient(String, int, byte[])
+ * @see RconServer#RconServer(int, String, IRconHandler) */
 public class RconClient {
 	
 	private final Object sync = new Object();

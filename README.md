@@ -52,7 +52,8 @@ public class YourClient {
             // Display the result in the console
             System.out.println(result);
         } catch (AuthenticationException authe) {
-            // an AuthenticationException will be thrown if the password sent to the server is incorrect
+            // An AuthenticationException will be thrown if the
+            // password sent to the server is incorrect
             throw authe;
         } catch (IOException ioe) {
             // This shouldn't happen unless something went horribly wrong
@@ -73,7 +74,8 @@ import net.kronos.rkon.core.IRconHandler;
 public class YourServer {
     public YourServer() {
         try {
-            // Starts a server on 127.0.0.1:27015, with the password "mypassword", and with handling from YourHandling
+            // Starts a server on 127.0.0.1:27015, with the password "mypassword",
+            // and with handling from the YourHandling class
             RconServer rcon = new RconServer(27015, "mypassword", new YourHandling());
         } catch (IOException ioe) {
             // Again, this shouldn't happen unless something went horribly wrong
@@ -85,7 +87,8 @@ public class YourServer {
         /*
          * Here is how you will handle commands coming into the server.
          *
-         * I highly recommend checking out Mojang/Brigader, its the library that both Minecraft and 1D6 use internally, and its highly customizable.
+         * I highly recommend checking out Mojang/Brigader, its the library that both
+         * Minecraft and 1D6 use internally, and its highly customizable.
          * https://github.com/Mojang/brigadier
          *
          * Below is a very basic example of Brigader + RconCore.
@@ -94,6 +97,7 @@ public class YourServer {
         // You can replace Object with any other object, maybe one that specifies this is coming from RCON?
         public static final CommandDispatcher<Object> dispatcher = new CommandDispatcher<>();
     
+        // You probably handle your commands elsewhere, this is just an example
         static {
             // From the Brigader repo's README
             dispatcher.register(
@@ -115,7 +119,8 @@ public class YourServer {
         @Override
         public String handle(String message) {
             // Yes, its really that simple
-            // Granted you probably want to do command caching and such, but this works out of the box
+            // Granted you probably want to do command caching and such,
+            // but this works out of the box
             return dispatcher.execute(message, new Object());
         }
     }
