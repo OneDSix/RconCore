@@ -17,7 +17,7 @@ It should be noted that the class `net.kronos.rkon.core.Rcon` was renamed to `ne
 <dependency>
     <groupId>com.github.OneDSix</groupId>
     <artifactId>RconCore</artifactId>
-    <version>2.0</version>
+    <version>master-SNAPSHOT</version>
 </dependency>
 ```
 ### Gradle
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.OneDSix:RconCore:main-SNAPSHOT'
+    implementation 'com.github.OneDSix:RconCore:master-SNAPSHOT'
 }
 ```
 
