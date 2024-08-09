@@ -2,8 +2,16 @@
 This is a library for interacting with and hosting a server using the [Source RCON Protocol](https://developer.valvesoftware.com/wiki/Source_RCON_Protocol).\
 It is intended for raw use; there are no presets or built-in commands.
 
-Originally forked from [Kronos666/rkon-core](https://github.com/Kronos666/rkon-core), and is fully backwards compatible, as well as compatible with most forks.\
-It should be noted that the class `net.kronos.rkon.core.Rcon` was renamed to `net.kronos.rkon.core.RconClient` to distingush it from `net.kronos.rkon.core.RconServer`.
+Originally forked from [Kronos666/rkon-core](https://github.com/Kronos666/rkon-core), and is fully backwards compatible, as well as compatible with most forks.
+
+## Changelog
+
+Beside these changes, this project is a drop-in replacement for Kronos666/rkon-core.
+
+- `net.kronos.rkon.core.Rcon` was renamed to `net.kronos.rkon.core.RconClient` to distinguish it from `net.kronos.rkon.core.RconServer`.
+- All constructors of `net.kronos.rkon.core.RconClient` no long need the string to be passed in as `byte[]`, and instead a normal `String` value.
+- Finished command handling code, and created the helper class `net.krono.rkon.core.RconServer.RconAcceptor` for multi-threading incoming requests.
+- Added and clarified some documentation.
 
 ## Installing
 [![](https://jitpack.io/v/OneDSix/RconCore.svg)](https://jitpack.io/#OneDSix/RconCore)
@@ -44,9 +52,9 @@ public class YourClient {
     public YourClient() {
         try {
             // Connects to 127.0.0.1:27015
-            RconClient rcon = new RconClient("127.0.0.1", 27015, "mypassword".getBytes());
+            RconClient rcon = new RconClient("127.0.0.1", 27015, "mypassword");
             
-            // On a Minecraft or 1D6 server this will list the connected players
+            // On a Minecraft or 1D6 server this will list the connected players/clients
             String result = rcon.command("list");
     
             // Display the result in the console
@@ -94,7 +102,8 @@ public class YourServer {
          * Below is a very basic example of Brigader + RconCore.
          * */
         
-        // You can replace Object with any other object, maybe one that specifies this is coming from RCON?
+        // You can replace Object with any other object,
+        // maybe one that specifies this is coming from RCON?
         public static final CommandDispatcher<Object> dispatcher = new CommandDispatcher<>();
     
         // You probably handle your commands elsewhere, this is just an example

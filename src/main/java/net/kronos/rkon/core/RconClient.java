@@ -9,8 +9,8 @@ import java.util.Random;
 import net.kronos.rkon.core.ex.AuthenticationException;
 
 /** An RCON Protocol compatible client.
- * @see RconClient#RconClient(String, int, byte[], int)
- * @see RconClient#RconClient(String, int, byte[])
+ * @see RconClient#RconClient(String, int, String, int)
+ * @see RconClient#RconClient(String, int, String)
  * @see RconServer#RconServer(int, String, IRconHandler) */
 public class RconClient {
 	
@@ -30,7 +30,7 @@ public class RconClient {
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public RconClient(String host, int port, byte[] password) throws IOException, AuthenticationException {
+	public RconClient(String host, int port, String password) throws IOException, AuthenticationException {
 		this(host, port, password, 0);
 	}
 
@@ -45,7 +45,7 @@ public class RconClient {
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public RconClient(String host, int port, byte[] password, int timeout) throws IOException, AuthenticationException {
+	public RconClient(String host, int port, String password, int timeout) throws IOException, AuthenticationException {
 		// Connect to host
 		this.connect(host, port, password, timeout);
 	}
@@ -60,7 +60,7 @@ public class RconClient {
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public void connect(String host, int port, byte[] password) throws IOException, AuthenticationException {
+	public void connect(String host, int port,String password) throws IOException, AuthenticationException {
 		connect(host, port, password, 0);
 	}
 	
@@ -75,7 +75,7 @@ public class RconClient {
 	 * @throws IOException
 	 * @throws AuthenticationException
 	 */
-	public void connect(String host, int port, byte[] password, int timeout) throws IOException, AuthenticationException {
+	public void connect(String host, int port, String password, int timeout) throws IOException, AuthenticationException {
 		if(host == null || host.trim().isEmpty()) {
 			throw new IllegalArgumentException("Host can't be null or empty");
 		}
@@ -95,7 +95,7 @@ public class RconClient {
 		}
 		
 		// Send the auth packet
-		RconPacket res = this.send(RconPacket.SERVER_DATA_AUTH, password);
+		RconPacket res = this.send(RconPacket.SERVER_DATA_AUTH, password.getBytes());
 		
 		// Auth failed
 		if(res.getRequestId() == -1) {
